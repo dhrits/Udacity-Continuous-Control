@@ -63,7 +63,7 @@ pip install .
 ```
 pip -q install ./python
 ```
-_Note that while this has been tested in Udacity's workspace, you may encounter errors while running locally._ In this case, please follow instructions 1-3 to manually set up your dependencies. **Simply running the cells in ```Continuous-Control.ipynb```** will go through these steps.
+_Note that while this has been tested in Udacity's workspace, you may encounter errors while running locally._ In this case, please follow instructions 1-3 to manually set up your dependencies. **Simply running the cells in ```Continuous-Control.ipynb``` will go through these steps.**
 
 ### Training the agent
 In order to train the agent, **please go through the training cells in** ```Continuous-Control.ipynb```. The result of the training are the checkpoint_actor.pth and checkpoint_critic.pth files which stores the weights of the trained actor and critic networks respectively. The notebook lists the step-by-step instructions to train these agents.
