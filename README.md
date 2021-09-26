@@ -18,7 +18,7 @@ The task is episodic, and in order to solve the environment, your agent must get
 ## Getting started
 Please follow the instructions to get started at [Udacity's Navigation Project github page](https://github.com/udacity/deep-reinforcement-learning/tree/master/p2_continuous-control). **Alternatively, if executing the project in a Udacity workspace, it is sufficient to run the notebooks which will install all relevant requirements via pip inline in the notebooks.**
 
-## Installing requirements
+### Installing requirements
 In order to install requirements, please follow instructions provided at [Udacity's DRLND repository here](https://github.com/udacity/deep-reinforcement-learning#dependencies). A minimal set of instructions to install dependencies is listed below:
 
 1. Create (and activate) a new environment with Python 3.6.
