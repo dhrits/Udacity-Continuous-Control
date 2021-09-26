@@ -3,7 +3,7 @@ import random
 import copy
 from collections import namedtuple, deque
 
-from model import Actor, Critic
+from model2 import Actor, Critic
 
 import torch
 import torch.nn.functional as F
@@ -14,10 +14,8 @@ BATCH_SIZE = 128        # minibatch size
 GAMMA = 0.99            # discount factor
 TAU = 1e-3              # for soft update of target parameters
 LR_ACTOR = 1e-4         # learning rate of the actor 
-LR_CRITIC = 4e-4        # learning rate of the critic
-# LR_ACTOR = 1e-5         # learning rate of the actor 
-# LR_CRITIC = 4e-5        # learning rate of the critic
-WEIGHT_DECAY = 0        # L2 weight decay
+LR_CRITIC = 3e-4        # learning rate of the critic
+WEIGHT_DECAY = 0.0001   # L2 weight decay
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
@@ -36,7 +34,6 @@ class Agent():
         self.state_size = state_size
         self.action_size = action_size
         self.seed = random.seed(random_seed)
-        self.random_seed = random_seed
 
         # Actor Network (w/ Target Network)
         self.actor_local = Actor(state_size, action_size, random_seed).to(device)
@@ -83,20 +80,6 @@ class Agent():
     def reset(self):
         self.noise.reset()
         self.t = 0
-        
-    def restart(self, actor_lr=1e-5, critic_lr=4e-5):
-        self.t = 0
-        def copy_model(local_model, target_model):
-            for target_param, local_param in zip(target_model.parameters(), local_model.parameters()):
-                target_param.data.copy_(local_param.data)
-        
-        copy_model(self.actor_local, self.actor_target)
-        copy_model(self.critic_local, self.critic_target)
-        self.actor_optimizer = optim.Adam(self.actor_local.parameters(), lr=actor_lr)
-        self.critic_optimizer = optim.Adam(self.critic_local.parameters(), lr=critic_lr, weight_decay=WEIGHT_DECAY)
-        self.memory = ReplayBuffer(self.action_size, BUFFER_SIZE, BATCH_SIZE, self.random_seed)
-        
-            
 
     def learn(self, experiences, gamma):
         """Update policy and value parameters using given batch of experience tuples.
